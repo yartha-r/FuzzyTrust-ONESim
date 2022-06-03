@@ -18,6 +18,7 @@ import movement.MovementModel;
 import movement.map.SimMap;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
+import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
 import rLearn.QLearn;
 import routing.MessageRouter;
 
@@ -254,8 +255,7 @@ public class SimScenario implements Serializable {
         this.endTime = s.getDouble(END_TIME_S);
         this.updateInterval = s.getDouble(UP_INT_S);
         this.simulateConnections = s.getBoolean(SIM_CON_S);
-        
-        
+
         readFuzzyFile(s.getSetting(FUZZYFILE));
 
         ensurePositiveValue(nrofGroups, NROF_GROUPS_S);
@@ -278,7 +278,6 @@ public class SimScenario implements Serializable {
         this.worldSizeX = worldSize[0];
         this.worldSizeY = worldSize[1];
 
-        
         createHosts();
 
         initQLearn();
@@ -327,7 +326,9 @@ public class SimScenario implements Serializable {
             System.err.println("Can't load file: '" + filename + "'");
             System.exit(1);
         }
-        this.fb= fis.getFunctionBlock(null);
+
+        this.fb = fis.getFunctionBlock(null);
+        JFuzzyChart.get().chart(fis);
     }
 
     /**

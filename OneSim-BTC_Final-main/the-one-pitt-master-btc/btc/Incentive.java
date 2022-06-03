@@ -17,6 +17,7 @@ import java.util.*;
 import javax.crypto.Cipher;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
+import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
 import routing.DecisionEngineRouter;
 import routing.MessageRouter;
 import routing.RoutingDecisionEngine;
@@ -144,6 +145,7 @@ public class Incentive {
                             SimScenario.getInstance().getFb().setVariable("suspension", QLearn.suspension.get(sender));
                             SimScenario.getInstance().getFb().evaluate();
                             double trust = SimScenario.getInstance().getFb().getVariable("trust").getValue();
+//                            JFuzzyChart.get().chart(SimScenario.getInstance().getFb().getVariable("trust"),SimScenario.getInstance().getFb().getVariable("trust").getDefuzzifier(), true);
                             if (trust > 0.5 && !QLearn.getSuspended().contains(sender)) {
                                 verificators.add(okay);
                             } else if (trust < -0.5) {
